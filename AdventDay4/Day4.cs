@@ -11,7 +11,7 @@ using Advent;
 namespace Advent
 {
 
-    class Day4
+    public class Day4
     {
         public class Room
         {
@@ -77,7 +77,7 @@ namespace Advent
             return decodedName;
         }
 
-        static List<ocurrancesByLetter> initResultsTemplate(List<ocurrancesByLetter> template)
+        public static List<ocurrancesByLetter> initResultsTemplate(List<ocurrancesByLetter> template)
         {
             char letter = 'a';
             for (int row = 0; row < 26; row++)
