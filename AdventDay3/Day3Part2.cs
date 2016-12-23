@@ -15,11 +15,6 @@ namespace Advent
             string[] input = File.ReadAllLines(@filename).Select(s => s.TrimStart()).ToArray();
             return input;
         }
-        public static List<string> getInputList(string filename)
-        {
-            List<string> input = File.ReadAllLines(@filename).Select(s => s.TrimStart()).ToList<string>();
-            return input;
-        }
     }
 }
 
@@ -71,7 +66,7 @@ namespace AdventDay3
 
         static void Main(string[] args)
         {
-            string[] input = File.ReadAllLines(@"Day3.txt").Select(s => s.TrimStart()).ToArray();
+            string[] input = File.ReadAllLines(@"input.txt").Select(s => s.TrimStart()).ToArray();
             int possibleTriangles = 0;
             int impossibleTriangles = 0;
 
