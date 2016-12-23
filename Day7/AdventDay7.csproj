@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85977CBC-3C92-4C58-9D17-6CFA6E30AA2C}</ProjectGuid>
+    <ProjectGuid>{965F6B40-E26C-45C4-9E2B-9B32E899EA51}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AdventDay6</RootNamespace>
-    <AssemblyName>AdventDay6</AssemblyName>
+    <RootNamespace>Day7</RootNamespace>
+    <AssemblyName>Day7</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Day6wat.cs" />
+    <Compile Include="Day7.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +53,6 @@
     <ProjectReference Include="..\AdventDay3\AdventDay3.csproj">
       <Project>{04fa2e9d-82fe-45e4-938f-33d94491743d}</Project>
       <Name>AdventDay3</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AdventDay4\AdventDay4.csproj">
-      <Project>{6d11c6b3-cf89-4f32-bb53-6753aa7ec358}</Project>
-      <Name>AdventDay4</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
