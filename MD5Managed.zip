@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Redirecting to newer content...</title>
+  <meta http-equiv="refresh" content="3;url=../ComputeFileHashes/ComputeFileHashes.zip"/>
+  <style type="text/css">
+    body
+    {
+      font-family:Verdana,Arial,Sans-Serif;
+      font-size:10pt;
+    }
+  </style>
+</head>
+<body>
+<p>
+MD5Managed.zip has been superseded by <a href="../ComputeFileHashes/ComputeFileHashes.zip">ComputeFileHashes.zip</a>.
+The download should begin shortly...
+</p>
+</body>
+</html>
