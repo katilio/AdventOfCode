@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Day5;
 
@@ -43,25 +44,51 @@ namespace AdventDay14
             return stringBuilder.ToString();
         }
 
-        static void FindQuintuple(ref int count, string source, int index, char charToFind)
+        private static string StretchHash(byte[] hash)
         {
-            for (int i = 0; i < 10000; i++)
+            string ConvertedHash = ToHex(hash).ToLower();
+            hash = Encoding.ASCII.GetBytes(ConvertedHash);
+            var md5 = new Delay.MD5Managed();
+            for (int i = 0; i < 2016; i++)
             {
+                hash = md5.ComputeHash(hash);
+                ConvertedHash = ToHex(hash).ToLower();
+                if (i < 2015)
+                {
+                    hash = Encoding.ASCII.GetBytes(ConvertedHash);
+                }
+            }
+
+            return ToHex(hash).ToLower();
+        }
+
+        static void FindQuintuple(ref int count, ref int KeyIndex, string salt, int index, char charToFind)
+        {
+            for (int i = index; i < index+1000; i++)
+            {
+                string source = salt + i;
                 byte[] BytesSource = Encoding.ASCII.GetBytes(source);
                 var md5 = new Delay.MD5Managed();
                 byte[] hash = md5.ComputeHash(BytesSource);
-                string ConvertedHash = ToHex(hash);
-
-                for (int o = 0; o < ConvertedHash.Length; o++)
+                string ConvertedHash = StretchHash(hash);
+                //string match = charToFind.ToString() + charToFind.ToString() + charToFind.ToString() + charToFind.ToString() + charToFind.ToString();
+                for (int o = 0; o < ConvertedHash.Length - 3; o++)
                 {
                     if (ConvertedHash[o] == charToFind && o + 4 < ConvertedHash.Length)
                     {
-                        if (ConvertedHash[o + 1] == charToFind && ConvertedHash[o + 2] == charToFind && ConvertedHash[o + 3] == charToFind && ConvertedHash[o + 4] == charToFind)
+                        if (ConvertedHash[o + 3] == charToFind && ConvertedHash[o + 4] == charToFind)
                         {
-                            count++;
-                            return;
+                            if (ConvertedHash[o + 1] == charToFind && ConvertedHash[o + 2] == charToFind)
+                            {
+                                //                if (ConvertedHash.Contains(match))
+                                //{
+                                count++;
+                                KeyIndex = index;
+                                return;
+                                //}
+                            }
                         }
-                        else o += 4;
+                        else o += 2;
                     }
                 }
             }
@@ -69,27 +96,54 @@ namespace AdventDay14
 
         static void Main(string[] args)
         {
-            string salt = "abc";
+            string salt = "cuanljph";
             int keysFound = 0;
-            while (keysFound <= 64)
+            int lastPossibleKeyIndex = 0;
+            int lastKeyIndex = 0;
+            int index = 0;
+            while (keysFound < 64)
             {
-                int index = 0;
                 string HashSource = salt + index.ToString();
                 byte[] BytesSource = Encoding.ASCII.GetBytes(HashSource);
                 var md5 = new Delay.MD5Managed();
                 byte[] hash = md5.ComputeHash(BytesSource);
-                string ConvertedHash = ToHex(hash);
-                char previousChar;
+                string ConvertedHash = ToHex(hash).ToLower();
+                hash = Encoding.ASCII.GetBytes(ConvertedHash);
+                for (int i = 0; i < 2016; i++)
+                {
+                    //ConvertedHash = GetMd5Hash(ConvertedHash);
+                    hash = md5.ComputeHash(hash);
+                    ConvertedHash = ToHex(hash).ToLower();
+                    if (i < 2015)
+                    { 
+                        hash = Encoding.ASCII.GetBytes(ConvertedHash);
+                    }
+                }
+                ConvertedHash = ToHex(hash).ToLower();
+                //ConvertedHash = StretchHash(hash);
+                char previousChar = ' ';
+                char currentChar;
                 for (int i = 0; i < ConvertedHash.Length; i++)
                 {
-                    char currentChar = ConvertedHash[i];
-
-
+                    currentChar = ConvertedHash[i];
+                    //Console.Write(ConvertedHash[i]);
+                    if (previousChar == currentChar && i+1 < ConvertedHash.Length)
+                    {
+                        if (ConvertedHash[i + 1] == currentChar)
+                        {
+                            lastPossibleKeyIndex = index;
+                            /*Task t = Task.Factory.StartNew(() => { */
+                            FindQuintuple(ref keysFound, ref lastKeyIndex, salt, index + 1, currentChar);
+                            i = ConvertedHash.Length;
+                        }
+                    }
+                    previousChar = currentChar;
                 }
+                index++;
             }
-
-
-            //md5.ComputeHash();
+                
+            Console.Write(lastKeyIndex-1);
+            Console.ReadLine();
         }
     }
 }
