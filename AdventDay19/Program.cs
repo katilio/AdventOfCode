@@ -56,7 +56,7 @@ namespace AdventDay19
                 solution = n - PP3;   
             }
             else { solution = 2 * (n - (2 * PP3)) + PP3; }
-            //For N, get the next higher power of 3 (NP3) or previous power of 3 (PP3)
+            //For N, get the next higher power of 3 (NP3) and previous power of 3 (PP3)
             //Difference between N and NP3 or PP3
             //If N is between PP3+1 and PP3+PP3, solution is 1 for PP3+1, 2 for PP3+2, etc
             //If N is higher than 2*PP3, then solution is PP3+2x, where x is the difference between N and 2*PP3

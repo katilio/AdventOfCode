@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventDay3", "AdventDay3\AdventDay3.csproj", "{04FA2E9D-82FE-45E4-938F-33D94491743D}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventDay19", "AdventDay19\AdventDay19.csproj", "{1D882EEC-2110-4A38-A469-0A9565D992A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventDay20", "AdventDay20\AdventDay20.csproj", "{AF5CF226-C9C4-49A5-AA0D-85F8FB6B3BCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventDay21", "AdventDay21\AdventDay21.csproj", "{FD4E6896-B34C-409E-9C95-9B58ED5E1AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{AF5CF226-C9C4-49A5-AA0D-85F8FB6B3BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF5CF226-C9C4-49A5-AA0D-85F8FB6B3BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF5CF226-C9C4-49A5-AA0D-85F8FB6B3BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4E6896-B34C-409E-9C95-9B58ED5E1AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4E6896-B34C-409E-9C95-9B58ED5E1AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4E6896-B34C-409E-9C95-9B58ED5E1AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4E6896-B34C-409E-9C95-9B58ED5E1AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
