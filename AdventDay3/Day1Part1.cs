@@ -12,7 +12,7 @@ namespace AdventDay1
     static void Main(string[] args)
     {
         Advent.Shared advent = new Advent.Shared();
-        Console.Write("penis");
+        Console.Write("test");
         Console.WriteLine();
         Console.ReadLine();
 
