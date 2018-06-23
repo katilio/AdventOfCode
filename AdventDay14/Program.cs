@@ -99,6 +99,7 @@ namespace AdventDay14
                                 List<int> indexList = new List<int>();
                                 indexList.Add(index);
                                 Quints.Add(key: currentChar, value: indexList);
+                                Console.WriteLine("Found quint at index " + index);
                                 return true;
                             }
                         }
@@ -142,11 +143,34 @@ namespace AdventDay14
                         KeyIndex = index;
                     }
                 }
-                if (count == 64) {
+                if (count == 64)
+                {
                     return;
                 }
             }
         }
+
+        //Main function after all hashes have been computed. For every triplet try to find a quint in the next 1000 indices
+        //static void FindKey(Dictionary<char, List<int>> Quints, List<Triplet> Triplets, ref int count, ref int KeyIndex)
+        //{
+        //    int InternalCount = 0;
+        //    int LastKeyIndex = 0;
+        //    Parallel.ForEach(Triplets, triplet =>
+        //    {
+        //        int index = triplet.index;
+        //        char charToFind = triplet.Char;
+        //        int lastTripleIndex = index;
+        //        if (FindQuint(Quints, charToFind, index))
+        //            {
+        //                InternalCount++;
+        //                LastKeyIndex = index;
+        //            }
+        //        if (InternalCount == 64)
+        //        {
+        //            return;
+        //        }
+        //    });
+        //}
 
         //static void FindQuintuple(ref int count, ref int KeyIndex, string salt, int index, char charToFind)
         //{
@@ -188,12 +212,17 @@ namespace AdventDay14
             int keysFound = 0;
             int lastPossibleKeyIndex = 0;
             int lastKeyIndex = 0;
-            int index = 0;
+            //int index = 0; Not needed when using Parallel.For
             List<Triplet> Triplets = new List<Triplet>();
             Dictionary<char, List<int>> Quints = new Dictionary<char, List<int>>();
             //Calculate first 21k hashes (solution given this input is right before 21k, otherwise use 30k if you want to be safe)
-            while (index < 21000)
+            int[] indices = new int[16];
+            Parallel.For(0, 16, indexMult =>
             {
+                indices[indexMult] = 1500*indexMult;
+                int index = indices[indexMult];
+                while (index < (1500*(indexMult+1)))
+                {
                 string HashSource = salt + index.ToString();
                 byte[] BytesSource = Encoding.ASCII.GetBytes(HashSource);
                 var md5 = new Delay.MD5Managed();
@@ -206,7 +235,7 @@ namespace AdventDay14
                     hash = md5.ComputeHash(hash);
                     ConvertedHash = ToHex(hash).ToLower();
                     if (i < 2015)
-                    { 
+                    {
                         hash = Encoding.ASCII.GetBytes(ConvertedHash);
                     }
                 }
@@ -216,7 +245,38 @@ namespace AdventDay14
                 CheckAndAddTriplet(ConvertedHash, ref Triplets, index);
 
                 index++;
+                }
             }
+            );
+
+            //while (index < 21000) //Old Non-parallel
+            //{
+            //    string HashSource = salt + index.ToString();
+            //    byte[] BytesSource = Encoding.ASCII.GetBytes(HashSource);
+            //    var md5 = new Delay.MD5Managed();
+            //    byte[] hash = md5.ComputeHash(BytesSource);
+            //    string ConvertedHash = ToHex(hash).ToLower();
+            //    hash = Encoding.ASCII.GetBytes(ConvertedHash);
+            //    //Same thing as StretchHash()
+            //    for (int i = 0; i < 2016; i++)
+            //    {
+            //        hash = md5.ComputeHash(hash);
+            //        ConvertedHash = ToHex(hash).ToLower();
+            //        if (i < 2015)
+            //        { 
+            //            hash = Encoding.ASCII.GetBytes(ConvertedHash);
+            //        }
+            //    }
+            //    ConvertedHash = ToHex(hash).ToLower();
+
+            //    CheckAndAddQuintet(ConvertedHash, ref Quints, index);
+            //    CheckAndAddTriplet(ConvertedHash, ref Triplets, index);
+
+            //    index++;
+            //}
+
+            //Sort list of Triplets by index since parallel method adds triplets in arbitrary index order
+            Triplets.Sort((p1, p2) => p1.index.CompareTo(p2.index));
 
             while (keysFound < 64)
             {
